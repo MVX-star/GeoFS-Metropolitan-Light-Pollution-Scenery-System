@@ -1,4 +1,4 @@
-# GeoFS-Metropolitan-Light-Pollution-Scenery-System
+# GeoFS After Dark
 This addon adds metropolitan light pollution to cities across the world like New York City, Paris, Dubai, Tokyo, Sydney, Rio De Janeiro, Johannesburg, etc. This is a scenery addon. 
 
 When you download the addon, you will see a pop-up menu listing all the timezones, including some with decimals for some reason. 
