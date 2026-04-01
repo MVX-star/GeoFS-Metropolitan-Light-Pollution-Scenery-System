@@ -1,10 +1,25 @@
 # GeoFS After Dark
-This add-on adds metropolitan light pollution to cities around the world, such as New York City, Paris, Dubai, Tokyo, Sydney, Rio de Janeiro, and Johannesburg. This is a scenery addon. 
 
-When you download the addon, you will see a pop-up menu listing all the timezones, including some with decimals for some reason. 
+GeoFS After Dark is a scenery add-on that adds realistic metropolitan light pollution to major cities around the world.
 
-The time zones are as listed:
+Supported cities include:
 
+New York City
+Paris
+Dubai
+Tokyo
+Sydney
+Rio de Janeiro
+Johannesburg
+🌍 Features
+Adds immersive night lighting effects to major global cities
+Enhances realism during nighttime flights
+Custom timezone selection system
+🕒 Timezone System
+
+When you install the add-on, a pop-up menu will appear with selectable timezones.
+
+Available Timezones:
 UTC-12
 UTC-11
 UTC-10
@@ -12,13 +27,12 @@ UTC-9
 UTC-8
 UTC-7
 UTC-6
-UITC-5
+UTC-5
 UTC-4
 UTC-3
 UTC-2
 UTC-1
 UTC+0
-UTC+1
 UTC+1
 UTC+2
 UTC+3
@@ -28,7 +42,7 @@ UTC+5
 UTC+5.5
 UTC+5.75
 UTC+6
-UTC+&
+UTC+7
 UTC+8
 UTC+9
 UTC+9.5
@@ -37,51 +51,49 @@ UTC+11
 UTC+12
 UTC+13
 
-TIP: Turn on multiple timezones at a time to potentially see light pollution of another city on the horizon. It looks so cool. Trust me.
+⚠️ Note: Some timezones use decimals (e.g., UTC+5.5) because real-world regions use half-hour or quarter-hour offsets.
 
+💡 Tip
 
+Turn on multiple timezones at once to see distant cities glowing on the horizon.
+It creates a super realistic and cinematic effect.
 
-
-
-How to install addon(s) on Tampermonkey (RECOMMENDED)
-
-Step 1: Install Tampermonkey
-Go to your browser’s extension store (Chrome Web Store, Edge Add-ons, etc.)
+⚙️ Installation (Tampermonkey – Recommended)
+1. Install Tampermonkey
+Go to your browser’s extension store
 Search for Tampermonkey
-Click Install/Add to Browser
-You should now see the Tampermonkey icon in your toolbar
-
- Step 2: Find the Script on GitHub
-Open the GitHub page that has the script
-Look for a file ending in .js (JavaScript file)
-Example: script.user.js or main.js
-Click on the file name
-
- Step 3: Copy the Code
-Once the file opens, click the “Raw” button (important!)
-Select all the code:
-Press Ctrl + A
-Copy it:
-Press Ctrl + C
-
- Step 4: Open Tampermonkey Dashboard
-Click the Tampermonkey icon in your browser
-Click “Dashboard”
-Click “+ Create a new script.”
-
- Step 5: Paste the Code
-Delete the default template code inside the editor
-Paste your copied code:
-Press Ctrl + V
-
- Step 6: Save the Script
-Press Ctrl + S OR click File → Save
-The script is now active!
-
- Step 7: Test It
-Go to the website the script is meant for
+Click Add to Browser
+Confirm installation
+2. Find the Script
+Open this repository on GitHub
+Locate a .js file (example: script.user.js)
+Click the file
+3. Copy the Code
+Click the Raw button
+Press Ctrl + A (select all)
+Press Ctrl + C (copy)
+4. Open Tampermonkey
+Click the Tampermonkey icon
+Select Dashboard
+Click + Create a new script
+5. Paste the Script
+Delete the default template
+Press Ctrl + V to paste your code
+6. Save
+Press Ctrl + S
+Your script is now active
+7. Run the Add-on
+Open GeoFS
 Refresh the page
-The script should now run automatically
+The add-on should load automatically
+❗ Troubleshooting
 
-If the Script doesn’t Work
-Check if Tampermonkey is able to run Userscripts. You can check by opening the Manage Extensions for Tampermonkey.
+If the script doesn’t work:
+
+Make sure Tampermonkey is enabled
+Check that the script is turned on in the dashboard
+Ensure you are on the correct website
+🚀 Notes
+
+This is a visual-only add-on focused on atmosphere and realism.
+No impact on gameplay mechanics.
