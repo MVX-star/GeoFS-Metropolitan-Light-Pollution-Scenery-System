@@ -55,8 +55,8 @@ UTC+13
 
 💡 Tip
 
-Turn on multiple timezones at once to see distant cities glowing on the horizon.
-It creates a super realistic and cinematic effect.
+Turn on multiple time zones at once to see distant cities glowing on the horizon.
+It creates a super-realistic and cinematic effect.
 
 # ⚙️ Installation (Tampermonkey)
 1. Install Tampermonkey.
@@ -77,15 +77,16 @@ Click the Tampermonkey icon.
 Select Dashboard.
 Click + Create a new script.
 5. Paste the Script
-Delete the default template
-Press Ctrl + V to paste your code
+Delete the default template.
+Press Ctrl + V to paste your code.
 6. Save
-Press Ctrl + S
-Your script is now active
+Press Ctrl + S.
+Your script is now active.
 7. Run the Add-on
 Open GeoFS.
-Refresh the page.
+Refresh the page if you already have it open.
 The add-on should load automatically.
+
 ❗ Troubleshooting
 
 If the script doesn’t work:
@@ -104,7 +105,7 @@ Load into the game normally.
 🔹 Step 2: Open the Console
 Press:
 Windows: Ctrl + Shift + J
-OR: F12 → then click Console
+OR: F12 → then click Console.
 This opens the developer console, where you can paste code.
 
 🔹 Step 3: Paste Your Script
