@@ -58,7 +58,7 @@ UTC+13
 Turn on multiple timezones at once to see distant cities glowing on the horizon.
 It creates a super realistic and cinematic effect.
 
-⚙️ Installation (Tampermonkey – Recommended)
+# ⚙️ Installation (Tampermonkey – Recommended)
 1. Install Tampermonkey
 Go to your browser’s extension store
 Search for Tampermonkey
