@@ -43,37 +43,35 @@
 const glowCache = {};
 
 function glowCanvas(intensity = 1, pop = 1000000) {
-
     const key = `${Math.round(intensity*10)}_${Math.round(pop/100000)}`;
     if (glowCache[key]) return glowCache[key];
 
+    const size = 256; // bigger canvas for larger glow
     const c = document.createElement("canvas");
-    c.width = c.height = 96;
+    c.width = c.height = size;
     const ctx = c.getContext("2d");
-
-    const i = intensity * glowAlphaMultiplier;
 
     ctx.globalCompositeOperation = "lighter";
 
-    const g = ctx.createRadialGradient(48,48,4,48,48,48);
-    g.addColorStop(0, `rgba(255,235,160,${0.6*i})`);
-    g.addColorStop(0.5, `rgba(255,235,160,${0.25*i})`);
+    // base radial gradient glow
+    const g = ctx.createRadialGradient(size/2, size/2, size*0.05, size/2, size/2, size/2);
+    g.addColorStop(0, `rgba(255,235,160,${0.7*intensity})`);
+    g.addColorStop(0.5, `rgba(255,235,160,${0.25*intensity})`);
     g.addColorStop(1, `rgba(255,235,160,0)`);
-
     ctx.fillStyle = g;
-    ctx.fillRect(0,0,96,96);
+    ctx.fillRect(0,0,size,size);
 
-    let dots = Math.min(Math.max(pop/8000,40),120);
-    const colors = ["255,255,220","255,240,150","255,255,255"];
-
+    // create lots of small overlapping dots
+    const dots = Math.min(Math.max(pop/3000,120),400); // more dots for dense glow
     for (let j=0; j<dots; j++){
-        const x = Math.random()*96;
-        const y = Math.random()*96;
-        const r = Math.random()*0.3 + 0.05;
+        const x = Math.random()*size;
+        const y = Math.random()*size;
+        const r = Math.random()*1.5 + 0.2; // bigger and more variable radius
+        const alpha = Math.random()*0.3 + 0.1; // small transparency variation
 
         ctx.beginPath();
         ctx.arc(x, y, r, 0, Math.PI*2);
-        ctx.fillStyle = `rgba(${colors[Math.floor(Math.random()*3)]},${i})`;
+        ctx.fillStyle = `rgba(255,235,160,${alpha*intensity})`;
         ctx.fill();
     }
 
@@ -123,6 +121,7 @@ function glowCanvas(intensity = 1, pop = 1000000) {
 {name:"San Antonio, USA", lat:29.4241, lon:-98.4936, pop:2600000, timezone:-6},
 {name:"Austin, USA", lat:30.2672, lon:-97.7431, pop:2400000, timezone:-6},
 {name:"Las Vegas, USA", lat:36.1699, lon:-115.1398, pop:2300000, timezone:-8},
+{name:"Baltimore, USA", lat:39.2905, lon:-76.6104, pop:2300000, timezone:-5},
 
 {name:"Portland, USA", lat:45.5152, lon:-122.6784, pop:2500000, timezone:-8},
 {name:"Sacramento, USA", lat:38.5816, lon:-121.4944, pop:2300000, timezone:-8},
@@ -679,34 +678,42 @@ cities.forEach(city => {
 });
 
         // ==========================
-        // 🌐 TIMEZONE MENU
-        // ==========================
-        const menu = document.createElement("div");
-        Object.assign(menu.style, {
-            position:"fixed",
-            top:"20px",
-            left:"20px",
-            background:"#111a",
-            color:"#fff",
-            padding:"10px",
-            borderRadius:"8px",
-            zIndex:9999,
-            cursor:"move",
-            maxHeight:"90vh",
-            overflowY:"auto"
-        });
+// 🌐 GEOFS-AFTER-DARK MENU
+// ==========================
 
-        const header = document.createElement("div");
-        header.textContent = "🌐 Timezones (double-click to collapse)";
-        header.style.fontWeight = "bold";
-        menu.appendChild(header);
+// 🔹 HIDE LIGHTS INITIALLY
+cities.forEach(city => {
+    if (city.entity) {
+        city.entity.show = false; // all lights OFF at start
+    }
+});
 
-        const container = document.createElement("div");
-        menu.appendChild(container);
+const menu = document.createElement("div");
+Object.assign(menu.style, {
+    position: "fixed",
+    top: "20px",
+    left: "20px",
+    background: "#111a",
+    color: "#fff",
+    padding: "10px",
+    borderRadius: "8px",
+    zIndex: 9999,
+    cursor: "move",
+    maxHeight: "90vh",
+    overflowY: "auto"
+});
 
-        const timezones = [
--12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,-1,
-0,1,2,3,3.5,4,5,5.5,5.75,6,7,8,9,9.5,10,11,12,13
+const header = document.createElement("div");
+header.textContent = "🌐 GeoFS-After-Dark";
+header.style.fontWeight = "bold";
+menu.appendChild(header);
+
+const container = document.createElement("div");
+menu.appendChild(container);
+
+const timezones = [
+    -12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,-1,
+    0,1,2,3,3.5,4,5,5.5,5.75,6,7,8,9,9.5,10,11,12,13
 ];
 
 timezones.forEach(tz => {
@@ -715,7 +722,7 @@ timezones.forEach(tz => {
 
     const cb = document.createElement("input");
     cb.type = "checkbox";
-    cb.checked = true;
+    cb.checked = false; // starts unchecked
     cb.dataset.tz = tz;
 
     cb.addEventListener("change", () => {
@@ -733,40 +740,40 @@ timezones.forEach(tz => {
     });
 
     label.appendChild(cb);
-    label.appendChild(document.createTextNode(` UTC${tz>=0?'+':''}${tz}`));
+    label.appendChild(document.createTextNode(` UTC${tz >= 0 ? '+' : ''}${tz}`));
     container.appendChild(label);
-}); // ✅ THIS LINE WAS MISSING
+});
 
-        document.body.appendChild(menu);
+document.body.appendChild(menu);
 
-        // ==========================
-        // 🖱 DRAGGING
-        // ==========================
-        let isDragging=false, offsetX=0, offsetY=0;
+// ==========================
+// 🖱 DRAGGING
+// ==========================
+let isDragging = false, offsetX = 0, offsetY = 0;
 
-        header.addEventListener("mousedown", e=>{
-            isDragging=true;
-            offsetX=e.clientX - menu.offsetLeft;
-            offsetY=e.clientY - menu.offsetTop;
-        });
+header.addEventListener("mousedown", e => {
+    isDragging = true;
+    offsetX = e.clientX - menu.offsetLeft;
+    offsetY = e.clientY - menu.offsetTop;
+});
 
-        document.addEventListener("mouseup", ()=>isDragging=false);
+document.addEventListener("mouseup", () => isDragging = false);
 
-        document.addEventListener("mousemove", e=>{
-            if(isDragging){
-                menu.style.left = (e.clientX - offsetX) + "px";
-                menu.style.top = (e.clientY - offsetY) + "px";
-            }
-        });
+document.addEventListener("mousemove", e => {
+    if (isDragging) {
+        menu.style.left = (e.clientX - offsetX) + "px";
+        menu.style.top = (e.clientY - offsetY) + "px";
+    }
+});
 
-        // ==========================
-        // 🔽 COLLAPSE
-        // ==========================
-        let collapsed=false;
-        header.addEventListener("dblclick", ()=>{
-            collapsed = !collapsed;
-            container.style.display = collapsed ? "none" : "block";
-        });
+// ==========================
+// 🔽 COLLAPSE MENU
+// ==========================
+let collapsed = false;
+header.addEventListener("dblclick", () => {
+    collapsed = !collapsed;
+    container.style.display = collapsed ? "none" : "block";
+});
 
     }
 
