@@ -776,5 +776,3 @@ header.addEventListener("dblclick", () => {
 });
 
     }
-
-})();
