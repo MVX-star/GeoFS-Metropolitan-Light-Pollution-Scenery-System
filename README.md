@@ -17,7 +17,7 @@ Enhances realism during nighttime flights
 Custom timezone selection system
 🕒 Timezone System
 
-When you install the add-on, a pop-up menu will appear with selectable time zones.
+When you install the add-on, a pop-up menu will appear with selectable time zones. Double-click the tab to hide it.
 
 Available Timezones:
 UTC-12
