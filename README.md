@@ -125,8 +125,8 @@ Welcome to GeoFS: After Dark
 
 NEW Brightness Control and
 Fine-tune lighting to boost visibility, especially when you are on the ground.
-Including a NEW Search Bar.
-Instantly find time zones for cities around the world. 🌍
+Including a New Search Bar.
+Instantly find time zones for cities around the world. 
 
 > 🌆 v1.3 — City Lights Reimagined
 
