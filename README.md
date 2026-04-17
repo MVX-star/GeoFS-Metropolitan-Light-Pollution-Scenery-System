@@ -125,6 +125,10 @@ Region-Based Lighting Colors.
 Cities now glow with unique tones depending on their region.
 Experience warm amber/orange lights and cool white/blue hues for a more realistic night world
 
+> 🔧 v1.4 — Removed Brightness Slider
+
+The brightness slider was removed due to breaking the region-based lighting function.
+
 
 This is a visual-only add-on focused on atmosphere and realism.
 No impact on gameplay mechanics.
